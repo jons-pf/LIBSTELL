@@ -43,6 +43,7 @@ target_link_libraries (stell
 
                        PUBLIC
 
+                       sanitizer
                        $<$<BOOL:${MPI_Fortran_FOUND}>:MPI::MPI_Fortran>
                        $<$<BOOL:${NetCDF_FOUND}>:NetCDF::NetCDF>
                        $<$<BOOL:${SCALAPACK_FOUND}>:SCALAPACK::SCALAPACK>
