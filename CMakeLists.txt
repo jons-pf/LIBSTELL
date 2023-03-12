@@ -41,9 +41,12 @@ target_compile_definitions (stell
 #  this version to include the :: variants.
 target_link_libraries (stell
 
+                       INTERFACE
+                       
+                       sanitizer
+
                        PUBLIC
 
-                       sanitizer
                        $<$<BOOL:${MPI_Fortran_FOUND}>:MPI::MPI_Fortran>
                        $<$<BOOL:${NetCDF_FOUND}>:NetCDF::NetCDF>
                        $<$<BOOL:${SCALAPACK_FOUND}>:SCALAPACK::SCALAPACK>
