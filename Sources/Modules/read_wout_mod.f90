@@ -19,8 +19,9 @@
 !
 
       USE vmec_input, ONLY: lrfp, lmove_axis, nbfld, long_name,                &
-     &                      short_name
+     &                      short_name, restart
       USE mgrid_mod
+      USE vmec_state
 
       IMPLICIT NONE
 #if defined(NETCDF)
@@ -93,7 +94,11 @@
         vn_bsupumns_sur = 'bsupumns_sur',                               &
         vn_bsupvmns_sur = 'bsupvmns_sur',                               &
         vn_rbc = 'rbc', vn_zbs = 'zbs', vn_rbs = 'rbs', vn_zbc = 'zbc', &
-        vn_mnyq = 'mnyq', vn_nnyq = 'nnyq'
+        vn_mnyq = 'mnyq', vn_nnyq = 'nnyq',                             &
+
+!  Restart parameter
+        vn_xc = 'xc'
+
 ! Long names (ln_...)
       CHARACTER(LEN=*), PARAMETER :: ln_version = 'VMEC Version',       &
         ln_extension = 'Input file extension', ln_mgrid = 'MGRID file', &
@@ -210,7 +215,11 @@
         ln_rbs = 'Initial boundary R sin(mu-nv) coefficients',          &
         ln_zbc = 'Initial boundary Z cos(mu-nv) coefficients',          &
         ln_mnyq = 'Poloidal modes (Nyquist)',                           &
-        ln_nnyq = 'Toroidal modes (Nyquist)'
+        ln_nnyq = 'Toroidal modes (Nyquist)',                           &
+
+!  Restart parameters
+        ln_xc = 'VMEC State array'
+
 #endif
 !-----------------------------------------------
 !   L o c a l   V a r i a b l e s
@@ -1244,6 +1253,10 @@
       ENDIF
 
  1000 CONTINUE
+
+      IF (restart) THEN
+         CALL cdf_read(nwout, vn_xc, xc)
+      END IF
 
       CALL cdf_close(nwout, ierr)
 

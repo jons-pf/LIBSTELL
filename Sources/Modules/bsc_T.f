@@ -1485,7 +1485,7 @@
 
       CASE ('fil_circ','fcirc')
          CALL bsc_b_coil_fil_circ(this,x,b)
-      
+
       CASE ('fil_rogo')
 !  Rogowski. Not yet implemented
          WRITE(*,*) 'WARNING: bsc_b_coil: NOT YET IMPLEMENTED',                &
@@ -1510,7 +1510,7 @@
       ENDIF
       
       b(1:3) = this % current * bsc_k2_use * b(1:3)
-      
+
       END SUBROUTINE bsc_b_coil
 
 !-------------------------------------------------------------------------------
@@ -1540,37 +1540,38 @@
       nm1 = n - 1
 
 !  Form array of vectors relative to observation point x(i)
-      DO i = 1,3                                                              
-         capRv(i,1:n) = x(i) - this % xnod(i,1:n)                             
-      END DO                                                                  
-      
+      DO i = 1,3
+         capRv(i,1:n) = x(i) - this%xnod(i,1:n)
+      END DO
+
 !  Form array of relative vector lengths
 !JDH Quick Fix 2007-05-24
-      capR(1:n) = SQRT(MAX(this % eps_sq,capRv(1,1:n) * capRv(1,1:n) +         &
-     &                 capRv(2,1:n) * capRv(2,1:n) +                           &
-     &                 capRv(3,1:n) * capRv(3,1:n)))                                          
+      capR(1:n) = SQRT(MAX(this%eps_sq, capRv(1,1:n)*capRv(1,1:n) +            &
+     &                                  capRv(2,1:n)*capRv(2,1:n) +            &
+     &                                  capRv(3,1:n)*capRv(3,1:n)))
 !      capR(1:n) = SQRT(capRv(1,1:n) * capRv(1,1:n) +                           &
 !     &                 capRv(2,1:n) * capRv(2,1:n) +                           &
-!     &                 capRv(3,1:n) * capRv(3,1:n))                                          
+!     &                 capRv(3,1:n) * capRv(3,1:n))
 
 !  Form Cross Product
       DO i = 1, 3
-         j = mod(i,3_iprec) + 1
-         k = mod(j,3_iprec) + 1
-         crossv(i,1:nm1) = this % dxnod(j,1:nm1) * capRv(k,1:nm1)              &
-     &                   - this % dxnod(k,1:nm1) * capRv(j,1:nm1)                                
+         j = mod(i, 3_iprec) + 1
+         k = mod(j, 3_iprec) + 1
+         crossv(i,1:nm1) = this%dxnod(j,1:nm1)*capRv(k,1:nm1)                  &
+     &                   - this%dxnod(k,1:nm1)*capRv(j,1:nm1)
       END DO
 
       R1p2(1:nm1) = capR(1:nm1) + capR(2:n)
-      Rfactor(1:nm1) = 2 * R1p2(1:nm1) / (capR(1:nm1) * capR(2:n) *            &
-     &      MAX(R1p2(1:nm1)*R1p2(1:nm1) - this % lsqnod(1:nm1),                &
-     &          this % eps_sq))
+      Rfactor(1:nm1) = 2.0*R1p2(1:nm1)                                         &
+     &               / (capR(1:nm1)*capR(2:n) *                                &
+     &                  MAX(R1p2(1:nm1)*R1p2(1:nm1) -                          &
+     &                      this%lsqnod(1:nm1), this%eps_sq))
 
 ! Sum for B field
       DO i = 1,3                                                              
-         b(i) = DOT_PRODUCT(this%sens*crossv(i,1:nm1),Rfactor(1:nm1))
+         b(i) = DOT_PRODUCT(this%sens*crossv(i,1:nm1), Rfactor(1:nm1))
       END DO
-            
+
       END SUBROUTINE bsc_b_coil_fil_loop
 
 !-------------------------------------------------------------------------------
@@ -1751,7 +1752,7 @@
       IF (PRESENT(bsc_k2)) THEN
          b(1:3) = b(1:3) * bsc_k2 * bsc_k2inv_def
       ENDIF
-      
+
       END SUBROUTINE bsc_b_coilcoll
 
 !*******************************************************************************

@@ -29,6 +29,7 @@
 !>                                   Use @ref vmec_input::ftol_array instead.,               vmec_input::ftol}
 !>     @item{ftol_array,             Array of force tolarances for the multigrid runs.,      vmec_input::ftol_array}
 !>     @item{tcon0,                  Weight factor for constraint force.,                    vmec_input::tcon0}
+!>     @item{restart,                Restart VMEC iteration.,                                vmec_input::restart}
 !>     @table_subsection{vmec_precon_control_param_sec, Precondicioner control parameters.}
 !>        @item{precon_type,         Type of preconditioner.,                                vmec_input::precon_type}
 !>        @item{prec2d_threshold,    Force tolarance where the preconditioner is turned on., vmec_input::prec2d_threshold}
@@ -281,6 +282,8 @@
       REAL (rprec), DIMENSION(max_grids) :: ftol_array
 !>  Weight factor for constraint force.
       REAL (rprec)                       :: tcon0
+!>  Restart VMEC.
+      LOGICAL                            :: restart
 
 !  Precondicioner control parameters.
 !>  Type of preconditioner.
@@ -567,6 +570,7 @@
       ftol_array = 0
       ftol_array(1) = ftol
       tcon0 = 1
+      restart = .false.
 
 !  Precondition Parameters.
       precon_type = 'NONE'

@@ -64,4 +64,5 @@ target_sources(stell
                $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/vparams.f>
                $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/vsvd0.f>
                $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/write_array_generic.f>
+               $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/vmec_state.f>
 )
