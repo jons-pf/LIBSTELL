@@ -254,6 +254,8 @@
       INTEGER, PARAMETER :: long_name = 200
 !>  Maximum number of spline knots.
       INTEGER, PARAMETER :: max_profile = 20
+!>  Maximum number of occasions on which to dump debugging output
+      INTEGER, PARAMETER :: num_iter2_to_dump = 20
 
 
 !*******************************************************************************
@@ -622,7 +624,7 @@
      &   presfac, pres_offset, rthom, datathom, sigma_thom, phidiam,           &
      &   sigma_delphid, tensi2, fpolyi, nflxs, indxflx, dsiobt,                &
      &   sigma_flux, nbfld, indxbfld, bbc, sigma_b, lpofr, lrecon,             &
-     &   ledge_dump, lspectrum_dump, loptim                                    &
+     &   ledge_dump, lspectrum_dump, loptim,                                   &
 !  dbgout
      &   iter2_to_dump             ,                                           &
      &   dump_add_fluxes           ,                                           &
