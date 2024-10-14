@@ -491,6 +491,91 @@
       LOGICAL                                   :: loptim
       LOGICAL                                   :: lpofr           !!Obsolete
 
+      ! debugging output
+
+      !> values of iter2 for which to dump data
+      integer, dimension(num_iter2_to_dump) :: iter2_to_dump
+
+      !> individual flags to control debug output loosely related to
+      !> similarly-named routines (checkpoints along iterations)
+      LOGICAL :: dump_add_fluxes            = .false.
+      LOGICAL :: dump_metric                = .false.
+      LOGICAL :: dump_volume                = .false.
+      LOGICAL :: dump_bcontrav              = .false.
+      LOGICAL :: dump_bcov                  = .false.
+      LOGICAL :: dump_lambda_forces         = .false.
+      LOGICAL :: dump_bcov_full             = .false.
+      LOGICAL :: dump_precondn              = .false.
+      LOGICAL :: dump_forceNorms_tcon       = .false.
+      LOGICAL :: dump_lulv_comb             = .false.
+      LOGICAL :: dump_calc_fbal             = .false.
+      LOGICAL :: dump_evolve                = .false.
+      LOGICAL :: dump_fixaray               = .false.
+      LOGICAL :: dump_spectral_constraint   = .false.
+      LOGICAL :: dump_forces                = .false.
+      LOGICAL :: dump_totzsp_input          = .false.
+      LOGICAL :: dump_funct3d_geometry      = .false.
+      LOGICAL :: dump_constraint_force      = .false.
+      LOGICAL :: dump_guess_axis            = .false.
+      LOGICAL :: dump_interp                = .false.
+      LOGICAL :: dump_jacobian              = .false.
+      LOGICAL :: dump_lamcal                = .false.
+      LOGICAL :: dump_profil1d              = .false.
+      LOGICAL :: dump_profil3d              = .false.
+      LOGICAL :: dump_readin_boundary       = .false.
+      LOGICAL :: dump_phys_gc               = .false.
+      LOGICAL :: dump_fsq                   = .false.
+      LOGICAL :: dump_scale_m1              = .false.
+      LOGICAL :: dump_scalfor_out           = .false.
+      LOGICAL :: dump_fsq1                  = .false.
+      LOGICAL :: dump_scalfor_R             = .false.
+      LOGICAL :: dump_scalfor_Z             = .false.
+      LOGICAL :: dump_symforce              = .false.
+      LOGICAL :: dump_tomnsps               = .false.
+      LOGICAL :: dump_tomnspa               = .false.
+      LOGICAL :: dump_multigrid_result      = .false.
+      LOGICAL :: dump_rbsq                  = .false.
+      LOGICAL :: dump_printout              = .false.
+
+      ! fileout
+      LOGICAL :: dump_bcovar_fileout        = .false.
+      LOGICAL :: dump_bss                   = .false.
+      LOGICAL :: dump_jxbforce_bsub_lowpass = .false.
+      LOGICAL :: dump_jxbout                = .false.
+      LOGICAL :: dump_mercier               = .false.
+      LOGICAL :: dump_threed1_firstTable    = .false.
+      LOGICAL :: dump_threed1_geomag        = .false.
+      LOGICAL :: dump_threed1_volquant      = .false.
+      LOGICAL :: dump_threed1_axis          = .false.
+      LOGICAL :: dump_threed1_beta          = .false.
+      LOGICAL :: dump_threed1_shafrint      = .false.
+      LOGICAL :: dump_freeb_data            = .false.
+
+      ! debugging output flags for NESTOR
+      LOGICAL :: dump_vac1n_vacuum          = .false.
+      LOGICAL :: dump_vac1n_precal          = .false.
+      LOGICAL :: dump_vac1n_surface         = .false.
+      LOGICAL :: dump_vac1n_bextern         = .false.
+      LOGICAL :: dump_vac1n_analyt          = .false.
+      LOGICAL :: dump_vac1n_greenf          = .false.
+      LOGICAL :: dump_vac1n_fourp           = .false.
+      LOGICAL :: dump_vac1n_fouri           = .false.
+      LOGICAL :: dump_vac1n_solver          = .false.
+      LOGICAL :: dump_vac1n_bsqvac          = .false.
+
+      LOGICAL :: dump_vac2_vacuum           = .false.
+      LOGICAL :: dump_vac2_precal           = .false.
+      LOGICAL :: dump_vac2_surface          = .false.
+      LOGICAL :: dump_vac2_bexmat           = .false.
+      LOGICAL :: dump_vac2_matrix           = .false.
+      LOGICAL :: dump_vac2_foumat_unreg     = .false.
+      LOGICAL :: dump_vac2_analin           = .false.
+      LOGICAL :: dump_vac2_analyt           = .false.
+      LOGICAL :: dump_vac2_foumat           = .false.
+      LOGICAL :: dump_vac2_linsys           = .false.
+      LOGICAL :: dump_vac2_linslv           = .false.
+      LOGICAL :: dump_vac2_bsqvac           = .false.
+
       CHARACTER(len=120) :: arg1
 
 !>  Extension for the namelist input file name.
@@ -537,7 +622,71 @@
      &   presfac, pres_offset, rthom, datathom, sigma_thom, phidiam,           &
      &   sigma_delphid, tensi2, fpolyi, nflxs, indxflx, dsiobt,                &
      &   sigma_flux, nbfld, indxbfld, bbc, sigma_b, lpofr, lrecon,             &
-     &   ledge_dump, lspectrum_dump, loptim
+     &   ledge_dump, lspectrum_dump, loptim                                    &
+!  dbgout
+     &   iter2_to_dump             ,                                           &
+     &   dump_add_fluxes           ,                                           &
+     &   dump_metric               ,                                           &
+     &   dump_volume               ,                                           &
+     &   dump_bcontrav             ,                                           &
+     &   dump_bcov                 ,                                           &
+     &   dump_lambda_forces        ,                                           &
+     &   dump_bcov_full            ,                                           &
+     &   dump_precondn             ,                                           &
+     &   dump_forceNorms_tcon      ,                                           &
+     &   dump_lulv_comb            ,                                           &
+     &   dump_calc_fbal            ,                                           &
+     &   dump_evolve               ,                                           &
+     &   dump_fixaray              ,                                           &
+     &   dump_spectral_constraint  ,                                           &
+     &   dump_forces               ,                                           &
+     &   dump_totzsp_input         ,                                           &
+     &   dump_funct3d_geometry     ,                                           &
+     &   dump_constraint_force     ,                                           &
+     &   dump_guess_axis           ,                                           &
+     &   dump_interp               ,                                           &
+     &   dump_jacobian             ,                                           &
+     &   dump_lamcal               ,                                           &
+     &   dump_profil1d             ,                                           &
+     &   dump_profil3d             ,                                           &
+     &   dump_readin_boundary      ,                                           &
+     &   dump_phys_gc              ,                                           &
+     &   dump_fsq                  ,                                           &
+     &   dump_scale_m1             ,                                           &
+     &   dump_scalfor_out          ,                                           &
+     &   dump_fsq1                 ,                                           &
+     &   dump_scalfor_R            ,                                           &
+     &   dump_scalfor_Z            ,                                           &
+     &   dump_symforce             ,                                           &
+     &   dump_tomnsps              ,                                           &
+     &   dump_tomnspa              ,                                           &
+     &   dump_multigrid_result     ,                                           &
+     &   dump_rbsq                 ,                                           &
+     &   dump_printout             ,                                           &
+!  dbgout from fileout
+     &   dump_bcovar_fileout       ,                                           &
+     &   dump_bss                  ,                                           &
+     &   dump_jxbforce_bsub_lowpass,                                           &
+     &   dump_jxbout               ,                                           &
+     &   dump_mercier              ,                                           &
+     &   dump_threed1_firstTable   ,                                           &
+     &   dump_threed1_geomag       ,                                           &
+     &   dump_threed1_volquant     ,                                           &
+     &   dump_threed1_axis         ,                                           &
+     &   dump_threed1_beta         ,                                           &
+     &   dump_threed1_shafrint     ,                                           &
+     &   dump_freeb_data           ,                                           &
+!  NESTOR
+     &   dump_vacuum               ,                                           &
+     &   dump_precal               ,                                           &
+     &   dump_surface              ,                                           &
+     &   dump_bextern              ,                                           &
+     &   dump_analyt               ,                                           &
+     &   dump_greenf               ,                                           &
+     &   dump_fourp                ,                                           &
+     &   dump_fouri                ,                                           &
+     &   dump_solver               ,                                           &
+     &   dump_bsqvac
 
       NAMELIST /mseprofile/ mseprof
 
@@ -555,6 +704,8 @@
 !  Declare Arguments
       INTEGER, INTENT(in)  :: iunit
       INTEGER, INTENT(out) :: istat
+
+      CHARACTER(len=1000) :: line
 
 !  Start of executable code
 
@@ -670,8 +821,21 @@
 !  Backwards compatibility.
       raxis = 0
       zaxis = 0
-      
+
+      ! by default, dump first two iterations
+      iter2_to_dump(:) = 0
+      iter2_to_dump(1) = 1
+      iter2_to_dump(2) = 2
+
       READ (iunit, nml=indata, iostat=istat)
+
+      if (istat .ne. 0) then
+        ! help to debug invalid inputs:
+        ! re-read last line that lead to error and print it to screen
+        backspace(iunit)
+        read(iunit,fmt='(A)') line
+        write(*,'(A)') 'Invalid line in namelist: '//trim(line)
+      end if
 
       IF (ALL(niter_array == -1)) THEN
          niter_array = niter
