@@ -554,16 +554,16 @@
       LOGICAL :: dump_freeb_data            = .false.
 
       ! debugging output flags for NESTOR
-      LOGICAL :: dump_vacuum                = .false.
-      LOGICAL :: dump_precal                = .false.
-      LOGICAL :: dump_surface               = .false.
-      LOGICAL :: dump_bextern               = .false.
-      LOGICAL :: dump_analyt                = .false.
-      LOGICAL :: dump_greenf                = .false.
-      LOGICAL :: dump_fourp                 = .false.
-      LOGICAL :: dump_fouri                 = .false.
-      LOGICAL :: dump_solver                = .false.
-      LOGICAL :: dump_bsqvac                = .false.
+      LOGICAL :: dump_vac1n_vacuum          = .false.
+      LOGICAL :: dump_vac1n_precal          = .false.
+      LOGICAL :: dump_vac1n_surface         = .false.
+      LOGICAL :: dump_vac1n_bextern         = .false.
+      LOGICAL :: dump_vac1n_analyt          = .false.
+      LOGICAL :: dump_vac1n_greenf          = .false.
+      LOGICAL :: dump_vac1n_fourp           = .false.
+      LOGICAL :: dump_vac1n_fouri           = .false.
+      LOGICAL :: dump_vac1n_solver          = .false.
+      LOGICAL :: dump_vac1n_bsqvac          = .false.
 
       CHARACTER(len=120) :: arg1
 
@@ -666,16 +666,16 @@
      &   dump_threed1_shafrint     ,                                           &
      &   dump_freeb_data           ,                                           &
 !  NESTOR
-     &   dump_vacuum               ,                                           &
-     &   dump_precal               ,                                           &
-     &   dump_surface              ,                                           &
-     &   dump_bextern              ,                                           &
-     &   dump_analyt               ,                                           &
-     &   dump_greenf               ,                                           &
-     &   dump_fourp                ,                                           &
-     &   dump_fouri                ,                                           &
-     &   dump_solver               ,                                           &
-     &   dump_bsqvac
+     &   dump_vac1n_vacuum         ,                                           &
+     &   dump_vac1n_precal         ,                                           &
+     &   dump_vac1n_surface        ,                                           &
+     &   dump_vac1n_bextern        ,                                           &
+     &   dump_vac1n_analyt         ,                                           &
+     &   dump_vac1n_greenf         ,                                           &
+     &   dump_vac1n_fourp          ,                                           &
+     &   dump_vac1n_fouri          ,                                           &
+     &   dump_vac1n_solver         ,                                           &
+     &   dump_vac1n_bsqvac
 
       NAMELIST /mseprofile/ mseprof
 
