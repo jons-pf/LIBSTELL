@@ -554,29 +554,16 @@
       LOGICAL :: dump_freeb_data            = .false.
 
       ! debugging output flags for NESTOR
-      LOGICAL :: dump_vac1n_vacuum          = .false.
-      LOGICAL :: dump_vac1n_precal          = .false.
-      LOGICAL :: dump_vac1n_surface         = .false.
-      LOGICAL :: dump_vac1n_bextern         = .false.
-      LOGICAL :: dump_vac1n_analyt          = .false.
-      LOGICAL :: dump_vac1n_greenf          = .false.
-      LOGICAL :: dump_vac1n_fourp           = .false.
-      LOGICAL :: dump_vac1n_fouri           = .false.
-      LOGICAL :: dump_vac1n_solver          = .false.
-      LOGICAL :: dump_vac1n_bsqvac          = .false.
-
-      LOGICAL :: dump_vac2_vacuum           = .false.
-      LOGICAL :: dump_vac2_precal           = .false.
-      LOGICAL :: dump_vac2_surface          = .false.
-      LOGICAL :: dump_vac2_bexmat           = .false.
-      LOGICAL :: dump_vac2_matrix           = .false.
-      LOGICAL :: dump_vac2_foumat_unreg     = .false.
-      LOGICAL :: dump_vac2_analin           = .false.
-      LOGICAL :: dump_vac2_analyt           = .false.
-      LOGICAL :: dump_vac2_foumat           = .false.
-      LOGICAL :: dump_vac2_linsys           = .false.
-      LOGICAL :: dump_vac2_linslv           = .false.
-      LOGICAL :: dump_vac2_bsqvac           = .false.
+      LOGICAL :: dump_vacuum                = .false.
+      LOGICAL :: dump_precal                = .false.
+      LOGICAL :: dump_surface               = .false.
+      LOGICAL :: dump_bextern               = .false.
+      LOGICAL :: dump_analyt                = .false.
+      LOGICAL :: dump_greenf                = .false.
+      LOGICAL :: dump_fourp                 = .false.
+      LOGICAL :: dump_fouri                 = .false.
+      LOGICAL :: dump_solver                = .false.
+      LOGICAL :: dump_bsqvac                = .false.
 
       CHARACTER(len=120) :: arg1
 
